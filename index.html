@@ -120,6 +120,17 @@
             background-color: #00b5a3; /* Darker hover color */
         }
 
+        /* Teal-colored box for the percentage display */
+        .percentage-box {
+            background-color: #00D9CC;
+            color: #000;
+            padding: 10px;
+            margin-top: 10px;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
         /* Footer Styling */
         .footer {
             text-align: center;
@@ -178,6 +189,8 @@
     <label for="estimatedYield">Estimated Yield</label>
     <input type="text" id="estimatedYield" disabled placeholder="Estimated yield will be calculated">
 
+    <div class="percentage-box" id="percentageBlockCalculator"></div> <!-- Percentage display for Block Calculator -->
+
     <button onclick="calculateYield()">Calculate Estimated Yield</button>
 </div>
 
@@ -196,6 +209,8 @@
 
     <label for="estimatedYield2">Estimated Yield</label>
     <input type="text" id="estimatedYield2" disabled placeholder="Estimated yield will be calculated">
+
+    <div class="percentage-box" id="percentageDateCalculator"></div> <!-- Percentage display for Date Calculator -->
 
     <button onclick="calculateYieldByDate()">Calculate Estimated Yield</button>
 </div>
@@ -224,8 +239,13 @@
             const blocksPassed = currentBlock - blockStaked;
             const estimatedYield = (blocksPassed * yieldPerBlock * amountStaked).toFixed(2);
             document.getElementById('estimatedYield').value = formatNumber(estimatedYield) + " SAL";
+
+            // Calculate and display the percentage
+            const percentageYield = ((estimatedYield / amountStaked) * 100).toFixed(2);
+            document.getElementById('percentageBlockCalculator').textContent = `Estimated Yield: ${percentageYield}%`;
         } else {
             document.getElementById('estimatedYield').value = 'Invalid input';
+            document.getElementById('percentageBlockCalculator').textContent = '';
         }
     }
 
@@ -239,8 +259,13 @@
             const daysPassed = Math.floor((currentDate - dateStaked) / (1000 * 60 * 60 * 24)); // Difference in days
             const estimatedYield = (daysPassed * 720 * yieldPerBlock * amountStaked).toFixed(2); // Apply the formula
             document.getElementById('estimatedYield2').value = formatNumber(estimatedYield) + " SAL";
+
+            // Calculate and display the percentage
+            const percentageYield = ((estimatedYield / amountStaked) * 100).toFixed(2);
+            document.getElementById('percentageDateCalculator').textContent = `Estimated Yield: ${percentageYield}%`;
         } else {
             document.getElementById('estimatedYield2').value = 'Invalid input';
+            document.getElementById('percentageDateCalculator').textContent = '';
         }
     }
 

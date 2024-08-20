@@ -113,25 +113,39 @@
             border-radius: 8px;
             cursor: pointer;
             transition: background-color 0.3s;
-            margin-top: 20px;
+            margin-top: 40px; /* Increase buffer above the Calculate button */
         }
 
         .calculator button:hover {
             background-color: #00b5a3; /* Darker hover color */
         }
 
-        /* Teal-colored box for the percentage display */
+        /* Container for yield and percentage box */
+        .yield-container {
+            position: relative;
+            margin-bottom: 20px; /* Buffer below the Estimated Yield and above Calculate button */
+        }
+
+        /* Keep Estimated Yield box as is */
+        .estimated-yield-box {
+            width: 100%; /* Full width */
+            margin-bottom: 10px; /* Space between Estimated Yield and Percentage Box */
+        }
+
+        /* Green-colored box for the percentage display */
         .percentage-box {
-            background-color: #00D9CC;
+            background-color: #9EE700; /* Green color matching the page style */
             color: #000;
             padding: 5px;
             width: 80px; /* 1/8 the size of the input box */
             text-align: center;
             border-radius: 5px;
             font-size: 0.9rem;
-            margin-left: 10px;
-            display: inline-block; /* Make it inline so it aligns with the yield box */
-            visibility: hidden; /* Hide by default */
+            visibility: hidden; /* Hidden by default */
+            position: absolute;
+            right: 0;
+            top: 100%; /* Position it under the Estimated Yield box */
+            margin-top: 5px; /* Add buffer to prevent it from touching the Estimated Yield box */
         }
 
         /* Footer Styling */
@@ -189,10 +203,15 @@
     <label for="amountStaked">Amount Staked</label>
     <input type="text" id="amountStaked" placeholder="Enter amount of SAL staked" oninput="formatInput(this)">
 
-    <label for="estimatedYield">Estimated Yield</label>
-    <input type="text" id="estimatedYield" disabled placeholder="Estimated yield will be calculated">
+    <!-- Yield container to hold Estimated Yield and Percentage box aligned under it -->
+    <div class="yield-container">
+        <div>
+            <label for="estimatedYield">Estimated Yield</label>
+            <input type="text" id="estimatedYield" class="estimated-yield-box" disabled placeholder="Estimated yield will be calculated">
+        </div>
 
-    <div class="percentage-box" id="percentageBlockCalculator"></div> <!-- Percentage display for Block Calculator -->
+        <div class="percentage-box" id="percentageBlockCalculator"></div> <!-- Percentage display for Block Calculator -->
+    </div>
 
     <button onclick="calculateYield()">Calculate Estimated Yield</button>
 </div>
@@ -210,10 +229,15 @@
     <label for="amountStaked2">Amount Staked</label>
     <input type="text" id="amountStaked2" placeholder="Enter amount of SAL staked" oninput="formatInput(this)">
 
-    <label for="estimatedYield2">Estimated Yield</label>
-    <input type="text" id="estimatedYield2" disabled placeholder="Estimated yield will be calculated">
+    <!-- Yield container for the second calculator -->
+    <div class="yield-container">
+        <div>
+            <label for="estimatedYield2">Estimated Yield</label>
+            <input type="text" id="estimatedYield2" class="estimated-yield-box" disabled placeholder="Estimated yield will be calculated">
+        </div>
 
-    <div class="percentage-box" id="percentageDateCalculator"></div> <!-- Percentage display for Date Calculator -->
+        <div class="percentage-box" id="percentageDateCalculator"></div> <!-- Percentage display for Date Calculator -->
+    </div>
 
     <button onclick="calculateYieldByDate()">Calculate Estimated Yield</button>
 </div>

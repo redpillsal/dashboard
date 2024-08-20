@@ -4,30 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Salvium Supply Dashboard</title>
+
+    <!-- Import Source Sans Pro from Google Fonts -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700;900&display=swap">
+
     <style>
-        @font-face {
-            font-family: 'Aptos';
-            src: url('Microsoft Aptos Fonts/Aptos-Bold.ttf') format('truetype'); /* Bold font for general text */
-            font-weight: bold;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: 'Aptos-Light';
-            src: url('Microsoft Aptos Fonts/Aptos-Light.ttf') format('truetype'); /* Light font for category names */
-            font-weight: normal;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: 'Aptos-Black';
-            src: url('Microsoft Aptos Fonts/Aptos-Black.ttf') format('truetype'); /* Black font for values */
-            font-weight: 900;
-            font-style: normal;
+        /* Apply Source Sans Pro */
+        body, h2, ul, li, label, button {
+            font-family: 'Source Sans Pro', sans-serif;
         }
 
         body {
-            font-family: 'Aptos', sans-serif; /* Use Aptos-Bold as the default font */
             background-image: url('Salvium_GRADIENT.jpg'); /* Gradient background */
             background-size: cover;
             background-repeat: no-repeat;
@@ -76,8 +63,7 @@
         }
 
         li span {
-            font-family: 'Aptos-Black', sans-serif; /* Use Aptos-Black for the values */
-            font-weight: 900;
+            font-weight: 700; /* Bold font for the values */
             color: #00D9CC; /* Modern color for the values */
         }
 
@@ -99,8 +85,7 @@
         }
 
         .calculator label {
-            font-family: 'Aptos-Light', sans-serif;
-            font-size: 1.1rem;
+            font-weight: 400;
             margin-bottom: 8px;
             display: block;
             text-align: left; /* Flush left */

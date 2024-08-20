@@ -124,11 +124,14 @@
         .percentage-box {
             background-color: #00D9CC;
             color: #000;
-            padding: 10px;
-            margin-top: 10px;
+            padding: 5px;
+            width: 80px; /* 1/8 the size of the input box */
             text-align: center;
             border-radius: 5px;
-            font-size: 1rem;
+            font-size: 0.9rem;
+            margin-left: 10px;
+            display: inline-block; /* Make it inline so it aligns with the yield box */
+            visibility: hidden; /* Hide by default */
         }
 
         /* Footer Styling */
@@ -242,10 +245,11 @@
 
             // Calculate and display the percentage
             const percentageYield = ((estimatedYield / amountStaked) * 100).toFixed(2);
-            document.getElementById('percentageBlockCalculator').textContent = `Estimated Yield: ${percentageYield}%`;
+            document.getElementById('percentageBlockCalculator').textContent = `${percentageYield}%`;
+            document.getElementById('percentageBlockCalculator').style.visibility = 'visible'; // Show the percentage box
         } else {
             document.getElementById('estimatedYield').value = 'Invalid input';
-            document.getElementById('percentageBlockCalculator').textContent = '';
+            document.getElementById('percentageBlockCalculator').style.visibility = 'hidden'; // Hide the percentage box
         }
     }
 
@@ -262,10 +266,11 @@
 
             // Calculate and display the percentage
             const percentageYield = ((estimatedYield / amountStaked) * 100).toFixed(2);
-            document.getElementById('percentageDateCalculator').textContent = `Estimated Yield: ${percentageYield}%`;
+            document.getElementById('percentageDateCalculator').textContent = `${percentageYield}%`;
+            document.getElementById('percentageDateCalculator').style.visibility = 'visible'; // Show the percentage box
         } else {
             document.getElementById('estimatedYield2').value = 'Invalid input';
-            document.getElementById('percentageDateCalculator').textContent = '';
+            document.getElementById('percentageDateCalculator').style.visibility = 'hidden'; // Hide the percentage box
         }
     }
 

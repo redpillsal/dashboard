@@ -186,12 +186,12 @@
     <li>Total SAL staked: <span id="stake"></span></li>
     <li>Total SAL burned: <span id="burn"></span></li>
     <li>SAL block reward: <span>119</span></li> <!-- New button -->
-    <li>Total SAL Yield (30 days): <span id="yield">652,771</span></li>
-    <li>Yield per SAL staked (each block): <span id="yieldPerStaked">0.00000664</span></li>
+    <li>Total SAL Yield (30 days): <span id="yield">651,980</span></li> <!-- Updated yield value -->
+    <li>Yield per SAL staked (each block): <span id="yieldPerStaked">0.00000629</span></li> <!-- Updated yield per SAL -->
 </ul>
 
-<!-- Header for the First Calculator -->
-<h2>Salvium Staking Calculator (Block)</h2>
+<!-- Header for the Calculator -->
+<h2>Salvium Staking Calculator</h2>
 <img src="Salvium_ICON-BLK.png" alt="Salvium Logo" class="header-logo"> <!-- Centered logo below header -->
 <div class="calculator">
     <label for="blockStaked">Block Staked</label>
@@ -216,32 +216,6 @@
     <button onclick="calculateYield()">Calculate Estimated Yield</button>
 </div>
 
-<!-- Header for the Second Calculator -->
-<h2>Salvium Staking Calculator (Date)</h2>
-<img src="Salvium_ICON-BLK.png" alt="Salvium Logo" class="header-logo"> <!-- Centered logo below header -->
-<div class="calculator">
-    <label for="dateStaked">Date Staked</label>
-    <input type="date" id="dateStaked" placeholder="Enter date staked">
-
-    <label for="currentDate">Current Date</label>
-    <input type="date" id="currentDate" value=""> <!-- Editable and auto-fills today's date -->
-
-    <label for="amountStaked2">Amount Staked</label>
-    <input type="text" id="amountStaked2" placeholder="Enter amount of SAL staked" oninput="formatInput(this)">
-
-    <!-- Yield container for the second calculator -->
-    <div class="yield-container">
-        <div>
-            <label for="estimatedYield2">Estimated Yield</label>
-            <input type="text" id="estimatedYield2" class="estimated-yield-box" disabled placeholder="Estimated yield will be calculated">
-        </div>
-
-        <div class="percentage-box" id="percentageDateCalculator"></div> <!-- Percentage display for Date Calculator -->
-    </div>
-
-    <button onclick="calculateYieldByDate()">Calculate Estimated Yield</button>
-</div>
-
 <script>
     // Function to format numbers with thousand separators and remove extra decimals
     function formatNumber(num) {
@@ -260,7 +234,7 @@
         const blockStaked = parseInt(document.getElementById('blockStaked').value.replace(/,/g, ""));
         const currentBlock = parseInt(document.getElementById('currentBlock').value.replace(/,/g, ""));
         const amountStaked = parseFloat(document.getElementById('amountStaked').value.replace(/,/g, ""));
-        const yieldPerBlock = 0.00000661; // Yield per SAL staked for each block
+        const yieldPerBlock = 0.00000629; // Updated yield per SAL staked for each block
 
         if (!isNaN(blockStaked) && !isNaN(currentBlock) && !isNaN(amountStaked)) {
             const blocksPassed = currentBlock - blockStaked;
@@ -276,30 +250,6 @@
             document.getElementById('percentageBlockCalculator').style.visibility = 'hidden'; // Hide the percentage box
         }
     }
-
-    function calculateYieldByDate() {
-        const dateStaked = new Date(document.getElementById('dateStaked').value);
-        const currentDate = new Date(document.getElementById('currentDate').value);
-        const amountStaked = parseFloat(document.getElementById('amountStaked2').value.replace(/,/g, ""));
-        const yieldPerBlock = 0.00000661; // Yield per SAL staked for each block
-
-        if (!isNaN(dateStaked) && !isNaN(currentDate) && !isNaN(amountStaked)) {
-            const daysPassed = Math.floor((currentDate - dateStaked) / (1000 * 60 * 60 * 24)); // Difference in days
-            const estimatedYield = (daysPassed * 720 * yieldPerBlock * amountStaked).toFixed(2); // Apply the formula
-            document.getElementById('estimatedYield2').value = formatNumber(estimatedYield) + " SAL";
-
-            // Calculate and display the percentage
-            const percentageYield = ((estimatedYield / amountStaked) * 100).toFixed(2);
-            document.getElementById('percentageDateCalculator').textContent = `${percentageYield}%`;
-            document.getElementById('percentageDateCalculator').style.visibility = 'visible'; // Show the percentage box
-        } else {
-            document.getElementById('estimatedYield2').value = 'Invalid input';
-            document.getElementById('percentageDateCalculator').style.visibility = 'hidden'; // Hide the percentage box
-        }
-    }
-
-    // Auto-fill current date for second calculator
-    document.getElementById('currentDate').valueAsDate = new Date();
 
     // Fetch data from the API
     fetch('https://explorer.salvium.io/api/supply')
